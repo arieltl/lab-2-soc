@@ -22,13 +22,13 @@
 <td width="20%" bgcolor="#77BBFF">BSP Version:</td><td>default</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>Aug 29, 2024 8:04:53 PM</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>Sep 5, 2024 7:51:57 PM</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1724972693539</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1725576717553</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated Location:</td><td>/home/ariel/insper/24_2/soc/lab-2/software/niosLab2_bsp</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated Location:</td><td>/home/vacbo/Documents/Emb-Avancados/lab-2-soc/software/niosLab2_bsp</td>
 </tr>
 </table>
 <br>
@@ -38,16 +38,22 @@
 <th align="left" width="20%">Slave Descriptor</th><th align="left" width="40%">Address Range</th><th align="left" width="20%">Size</th><th align="left" width="20%">Attributes</th>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>jtag_uart_0</td><td>0x00021010 - 0x00021017</td><td>8</td><td class="listing">printable</td>
+<td>jtag_uart_0</td><td>0x00019030 - 0x00019037</td><td>8</td><td class="listing">printable</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>pio_0</td><td>0x00021000 - 0x0002100F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>pio_leds</td><td>0x00019020 - 0x0001902F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>onchip_memory_0</td><td>0x00018000 - 0x0001FFFF</td><td>32768</td><td class="listing">memory</td>
+<td>pio_in</td><td>0x00019010 - 0x0001901F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>onchip_memory2_0</td><td>0x00010000 - 0x00017FFF</td><td>32768</td><td class="listing">memory</td>
+<td>pio_motor</td><td>0x00019000 - 0x0001900F</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>onchip_memory_0</td><td>0x00010000 - 0x00017FFF</td><td>32768</td><td class="listing">memory</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>onchip_memory2_0</td><td>0x00000000 - 0x0000FFFF</td><td>65536</td><td class="listing">memory</td>
 </tr>
 </table>
 <br>
@@ -64,9 +70,6 @@
 <table border="1" bgcolor="#FFFFCC" width="50%">
 <tr bgcolor="#77BBFF" mode="wrap">
 <th align="left" width="50%">Section</th><th align="left" width="50%">Region</th>
-</tr>
-<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>.entry</td><td>onchip_memory2_0</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>.text</td><td>onchip_memory2_0</td>
@@ -558,7 +561,7 @@
 <td width="20%">Default Value:</td><td>0</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>1</td>
+<td width="20%">Value:</td><td>0</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>Boolean</td>
@@ -828,7 +831,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>jtag_uart_0</td>
+<td width="20%">Value:</td><td>none</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>

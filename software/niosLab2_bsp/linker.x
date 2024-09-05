@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_gen2_0' in SOPC Builder design 'niosLab2'
  * SOPC Builder design path: ../../niosLab2.sopcinfo
  *
- * Generated: Thu Aug 29 14:12:39 BRT 2024
+ * Generated: Thu Sep 05 19:51:58 BRT 2024
  */
 
 /*
@@ -50,14 +50,14 @@
 
 MEMORY
 {
-    reset : ORIGIN = 0x10000, LENGTH = 32
-    onchip_memory2_0 : ORIGIN = 0x10020, LENGTH = 32736
-    onchip_memory_0 : ORIGIN = 0x18000, LENGTH = 32768
+    reset : ORIGIN = 0x0, LENGTH = 32
+    onchip_memory2_0 : ORIGIN = 0x20, LENGTH = 65504
+    onchip_memory_0 : ORIGIN = 0x10000, LENGTH = 32768
 }
 
 /* Define symbols for each memory base-address */
-__alt_mem_onchip_memory2_0 = 0x10000;
-__alt_mem_onchip_memory_0 = 0x18000;
+__alt_mem_onchip_memory2_0 = 0x0;
+__alt_mem_onchip_memory_0 = 0x10000;
 
 OUTPUT_FORMAT( "elf32-littlenios2",
                "elf32-littlenios2",
@@ -86,14 +86,7 @@ SECTIONS
         KEEP (*(.entry))
     } > reset
 
-    /*
-     *
-     * This section's LMA is set to the .text region.
-     * crt0 will copy to this section's specified mapped region virtual memory address (VMA)
-     *
-     */
-
-    .exceptions 0x10020 : AT ( 0x10020 )
+    .exceptions :
     {
         PROVIDE (__ram_exceptions_start = ABSOLUTE(.));
         . = ALIGN(0x20);
@@ -124,14 +117,7 @@ SECTIONS
 
     PROVIDE (__flash_exceptions_start = LOADADDR(.exceptions));
 
-    /*
-     *
-     * This section's LMA is set to the .text region.
-     * crt0 will copy to this section's specified mapped region virtual memory address (VMA)
-     *
-     */
-
-    .text LOADADDR (.exceptions) + SIZEOF (.exceptions) : AT ( LOADADDR (.exceptions) + SIZEOF (.exceptions) )
+    .text :
     {
         /*
          * All code sections are merged into the text output section, along with
@@ -204,7 +190,8 @@ SECTIONS
         *(.preinit_array)
         PROVIDE (__preinit_array_end = ABSOLUTE(.));
         PROVIDE (__init_array_start = ABSOLUTE(.));
-        *(.init_array)
+        KEEP(*(SORT_BY_INIT_PRIORITY(.init_array.*)));
+        KEEP(*(.init_array));
         PROVIDE (__init_array_end = ABSOLUTE(.));
         PROVIDE (__fini_array_start = ABSOLUTE(.));
         *(.fini_array)
@@ -396,7 +383,7 @@ SECTIONS
 /*
  * Don't override this, override the __alt_stack_* symbols instead.
  */
-__alt_data_end = 0x20000;
+__alt_data_end = 0x18000;
 
 /*
  * The next two symbols define the location of the default stack.  You can
@@ -412,4 +399,4 @@ PROVIDE( __alt_stack_limit   = __alt_stack_base );
  * Override this symbol to put the heap in a different memory.
  */
 PROVIDE( __alt_heap_start    = end );
-PROVIDE( __alt_heap_limit    = 0x20000 );
+PROVIDE( __alt_heap_limit    = 0x18000 );

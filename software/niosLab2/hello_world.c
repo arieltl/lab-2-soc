@@ -3,12 +3,7 @@
 #include <alt_types.h>
 #include <io.h> /* Leiutura e escrita no Avalon */
 
-void delay(int n){
-      unsigned int delay = 0 ;
-      while(delay < n){
-          delay++;
-      }
-}
+
 
 int main(void){
   unsigned int led = 0;
@@ -17,8 +12,8 @@ int main(void){
 
   while(1){
       if (led <= 5){
-          IOWR_32DIRECT(PIO_0_BASE, 0, 0x01 <<led++);
-          delay(50000);
+          IOWR_32DIRECT(PIO_LEDS_BASE, 0, 0x01 <<led++);
+          usleep(50000);
       }
       else{
           led = 0;

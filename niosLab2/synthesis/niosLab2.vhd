@@ -8,9 +8,11 @@ use IEEE.numeric_std.all;
 
 entity niosLab2 is
 	port (
-		clk_clk       : in  std_logic                    := '0'; --   clk.clk
-		leds_export   : out std_logic_vector(5 downto 0);        --  leds.export
-		reset_reset_n : in  std_logic                    := '0'  -- reset.reset_n
+		clk_clk       : in  std_logic                    := '0';             --   clk.clk
+		leds_export   : out std_logic_vector(5 downto 0);                    --  leds.export
+		motor_export  : out std_logic_vector(4 downto 0);                    -- motor.export
+		pioin_export  : in  std_logic_vector(4 downto 0) := (others => '0'); -- pioin.export
+		reset_reset_n : in  std_logic                    := '0'              -- reset.reset_n
 	);
 end entity niosLab2;
 
@@ -64,7 +66,7 @@ architecture rtl of niosLab2 is
 	component niosLab2_onchip_memory2_0 is
 		port (
 			clk        : in  std_logic                     := 'X';             -- clk
-			address    : in  std_logic_vector(12 downto 0) := (others => 'X'); -- address
+			address    : in  std_logic_vector(13 downto 0) := (others => 'X'); -- address
 			clken      : in  std_logic                     := 'X';             -- clken
 			chipselect : in  std_logic                     := 'X';             -- chipselect
 			write      : in  std_logic                     := 'X';             -- write
@@ -93,7 +95,17 @@ architecture rtl of niosLab2 is
 		);
 	end component niosLab2_onchip_memory_0;
 
-	component niosLab2_pio_0 is
+	component niosLab2_pio_in is
+		port (
+			clk      : in  std_logic                     := 'X';             -- clk
+			reset_n  : in  std_logic                     := 'X';             -- reset_n
+			address  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			readdata : out std_logic_vector(31 downto 0);                    -- readdata
+			in_port  : in  std_logic_vector(4 downto 0)  := (others => 'X')  -- export
+		);
+	end component niosLab2_pio_in;
+
+	component niosLab2_pio_leds is
 		port (
 			clk        : in  std_logic                     := 'X';             -- clk
 			reset_n    : in  std_logic                     := 'X';             -- reset_n
@@ -104,9 +116,9 @@ architecture rtl of niosLab2 is
 			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
 			out_port   : out std_logic_vector(5 downto 0)                      -- export
 		);
-	end component niosLab2_pio_0;
+	end component niosLab2_pio_leds;
 
-	component niosLab2_pio_1 is
+	component niosLab2_pio_motor is
 		port (
 			clk        : in  std_logic                     := 'X';             -- clk
 			reset_n    : in  std_logic                     := 'X';             -- reset_n
@@ -117,17 +129,7 @@ architecture rtl of niosLab2 is
 			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
 			out_port   : out std_logic_vector(4 downto 0)                      -- export
 		);
-	end component niosLab2_pio_1;
-
-	component niosLab2_pio_in is
-		port (
-			clk      : in  std_logic                     := 'X';             -- clk
-			reset_n  : in  std_logic                     := 'X';             -- reset_n
-			address  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
-			readdata : out std_logic_vector(31 downto 0);                    -- readdata
-			in_port  : in  std_logic_vector(4 downto 0)  := (others => 'X')  -- export
-		);
-	end component niosLab2_pio_in;
+	end component niosLab2_pio_motor;
 
 	component niosLab2_mm_interconnect_0 is
 		port (
@@ -161,7 +163,7 @@ architecture rtl of niosLab2 is
 			nios2_gen2_0_debug_mem_slave_byteenable            : out std_logic_vector(3 downto 0);                     -- byteenable
 			nios2_gen2_0_debug_mem_slave_waitrequest           : in  std_logic                     := 'X';             -- waitrequest
 			nios2_gen2_0_debug_mem_slave_debugaccess           : out std_logic;                                        -- debugaccess
-			onchip_memory2_0_s1_address                        : out std_logic_vector(12 downto 0);                    -- address
+			onchip_memory2_0_s1_address                        : out std_logic_vector(13 downto 0);                    -- address
 			onchip_memory2_0_s1_write                          : out std_logic;                                        -- write
 			onchip_memory2_0_s1_readdata                       : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			onchip_memory2_0_s1_writedata                      : out std_logic_vector(31 downto 0);                    -- writedata
@@ -175,18 +177,18 @@ architecture rtl of niosLab2 is
 			onchip_memory_0_s1_byteenable                      : out std_logic_vector(3 downto 0);                     -- byteenable
 			onchip_memory_0_s1_chipselect                      : out std_logic;                                        -- chipselect
 			onchip_memory_0_s1_clken                           : out std_logic;                                        -- clken
-			pio_0_s1_address                                   : out std_logic_vector(1 downto 0);                     -- address
-			pio_0_s1_write                                     : out std_logic;                                        -- write
-			pio_0_s1_readdata                                  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			pio_0_s1_writedata                                 : out std_logic_vector(31 downto 0);                    -- writedata
-			pio_0_s1_chipselect                                : out std_logic;                                        -- chipselect
-			pio_1_s1_address                                   : out std_logic_vector(1 downto 0);                     -- address
-			pio_1_s1_write                                     : out std_logic;                                        -- write
-			pio_1_s1_readdata                                  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			pio_1_s1_writedata                                 : out std_logic_vector(31 downto 0);                    -- writedata
-			pio_1_s1_chipselect                                : out std_logic;                                        -- chipselect
 			pio_in_s1_address                                  : out std_logic_vector(1 downto 0);                     -- address
-			pio_in_s1_readdata                                 : in  std_logic_vector(31 downto 0) := (others => 'X')  -- readdata
+			pio_in_s1_readdata                                 : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			pio_leds_s1_address                                : out std_logic_vector(1 downto 0);                     -- address
+			pio_leds_s1_write                                  : out std_logic;                                        -- write
+			pio_leds_s1_readdata                               : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			pio_leds_s1_writedata                              : out std_logic_vector(31 downto 0);                    -- writedata
+			pio_leds_s1_chipselect                             : out std_logic;                                        -- chipselect
+			pio_motor_s1_address                               : out std_logic_vector(1 downto 0);                     -- address
+			pio_motor_s1_write                                 : out std_logic;                                        -- write
+			pio_motor_s1_readdata                              : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			pio_motor_s1_writedata                             : out std_logic_vector(31 downto 0);                    -- writedata
+			pio_motor_s1_chipselect                            : out std_logic                                         -- chipselect
 		);
 	end component niosLab2_mm_interconnect_0;
 
@@ -358,11 +360,11 @@ architecture rtl of niosLab2 is
 	signal mm_interconnect_0_nios2_gen2_0_debug_mem_slave_byteenable       : std_logic_vector(3 downto 0);  -- mm_interconnect_0:nios2_gen2_0_debug_mem_slave_byteenable -> nios2_gen2_0:debug_mem_slave_byteenable
 	signal mm_interconnect_0_nios2_gen2_0_debug_mem_slave_write            : std_logic;                     -- mm_interconnect_0:nios2_gen2_0_debug_mem_slave_write -> nios2_gen2_0:debug_mem_slave_write
 	signal mm_interconnect_0_nios2_gen2_0_debug_mem_slave_writedata        : std_logic_vector(31 downto 0); -- mm_interconnect_0:nios2_gen2_0_debug_mem_slave_writedata -> nios2_gen2_0:debug_mem_slave_writedata
-	signal mm_interconnect_0_pio_0_s1_chipselect                           : std_logic;                     -- mm_interconnect_0:pio_0_s1_chipselect -> pio_0:chipselect
-	signal mm_interconnect_0_pio_0_s1_readdata                             : std_logic_vector(31 downto 0); -- pio_0:readdata -> mm_interconnect_0:pio_0_s1_readdata
-	signal mm_interconnect_0_pio_0_s1_address                              : std_logic_vector(1 downto 0);  -- mm_interconnect_0:pio_0_s1_address -> pio_0:address
-	signal mm_interconnect_0_pio_0_s1_write                                : std_logic;                     -- mm_interconnect_0:pio_0_s1_write -> mm_interconnect_0_pio_0_s1_write:in
-	signal mm_interconnect_0_pio_0_s1_writedata                            : std_logic_vector(31 downto 0); -- mm_interconnect_0:pio_0_s1_writedata -> pio_0:writedata
+	signal mm_interconnect_0_pio_leds_s1_chipselect                        : std_logic;                     -- mm_interconnect_0:pio_leds_s1_chipselect -> pio_leds:chipselect
+	signal mm_interconnect_0_pio_leds_s1_readdata                          : std_logic_vector(31 downto 0); -- pio_leds:readdata -> mm_interconnect_0:pio_leds_s1_readdata
+	signal mm_interconnect_0_pio_leds_s1_address                           : std_logic_vector(1 downto 0);  -- mm_interconnect_0:pio_leds_s1_address -> pio_leds:address
+	signal mm_interconnect_0_pio_leds_s1_write                             : std_logic;                     -- mm_interconnect_0:pio_leds_s1_write -> mm_interconnect_0_pio_leds_s1_write:in
+	signal mm_interconnect_0_pio_leds_s1_writedata                         : std_logic_vector(31 downto 0); -- mm_interconnect_0:pio_leds_s1_writedata -> pio_leds:writedata
 	signal mm_interconnect_0_onchip_memory_0_s1_chipselect                 : std_logic;                     -- mm_interconnect_0:onchip_memory_0_s1_chipselect -> onchip_memory_0:chipselect
 	signal mm_interconnect_0_onchip_memory_0_s1_readdata                   : std_logic_vector(31 downto 0); -- onchip_memory_0:readdata -> mm_interconnect_0:onchip_memory_0_s1_readdata
 	signal mm_interconnect_0_onchip_memory_0_s1_address                    : std_logic_vector(12 downto 0); -- mm_interconnect_0:onchip_memory_0_s1_address -> onchip_memory_0:address
@@ -372,14 +374,14 @@ architecture rtl of niosLab2 is
 	signal mm_interconnect_0_onchip_memory_0_s1_clken                      : std_logic;                     -- mm_interconnect_0:onchip_memory_0_s1_clken -> onchip_memory_0:clken
 	signal mm_interconnect_0_pio_in_s1_readdata                            : std_logic_vector(31 downto 0); -- pio_in:readdata -> mm_interconnect_0:pio_in_s1_readdata
 	signal mm_interconnect_0_pio_in_s1_address                             : std_logic_vector(1 downto 0);  -- mm_interconnect_0:pio_in_s1_address -> pio_in:address
-	signal mm_interconnect_0_pio_1_s1_chipselect                           : std_logic;                     -- mm_interconnect_0:pio_1_s1_chipselect -> pio_1:chipselect
-	signal mm_interconnect_0_pio_1_s1_readdata                             : std_logic_vector(31 downto 0); -- pio_1:readdata -> mm_interconnect_0:pio_1_s1_readdata
-	signal mm_interconnect_0_pio_1_s1_address                              : std_logic_vector(1 downto 0);  -- mm_interconnect_0:pio_1_s1_address -> pio_1:address
-	signal mm_interconnect_0_pio_1_s1_write                                : std_logic;                     -- mm_interconnect_0:pio_1_s1_write -> mm_interconnect_0_pio_1_s1_write:in
-	signal mm_interconnect_0_pio_1_s1_writedata                            : std_logic_vector(31 downto 0); -- mm_interconnect_0:pio_1_s1_writedata -> pio_1:writedata
+	signal mm_interconnect_0_pio_motor_s1_chipselect                       : std_logic;                     -- mm_interconnect_0:pio_motor_s1_chipselect -> pio_motor:chipselect
+	signal mm_interconnect_0_pio_motor_s1_readdata                         : std_logic_vector(31 downto 0); -- pio_motor:readdata -> mm_interconnect_0:pio_motor_s1_readdata
+	signal mm_interconnect_0_pio_motor_s1_address                          : std_logic_vector(1 downto 0);  -- mm_interconnect_0:pio_motor_s1_address -> pio_motor:address
+	signal mm_interconnect_0_pio_motor_s1_write                            : std_logic;                     -- mm_interconnect_0:pio_motor_s1_write -> mm_interconnect_0_pio_motor_s1_write:in
+	signal mm_interconnect_0_pio_motor_s1_writedata                        : std_logic_vector(31 downto 0); -- mm_interconnect_0:pio_motor_s1_writedata -> pio_motor:writedata
 	signal mm_interconnect_0_onchip_memory2_0_s1_chipselect                : std_logic;                     -- mm_interconnect_0:onchip_memory2_0_s1_chipselect -> onchip_memory2_0:chipselect
 	signal mm_interconnect_0_onchip_memory2_0_s1_readdata                  : std_logic_vector(31 downto 0); -- onchip_memory2_0:readdata -> mm_interconnect_0:onchip_memory2_0_s1_readdata
-	signal mm_interconnect_0_onchip_memory2_0_s1_address                   : std_logic_vector(12 downto 0); -- mm_interconnect_0:onchip_memory2_0_s1_address -> onchip_memory2_0:address
+	signal mm_interconnect_0_onchip_memory2_0_s1_address                   : std_logic_vector(13 downto 0); -- mm_interconnect_0:onchip_memory2_0_s1_address -> onchip_memory2_0:address
 	signal mm_interconnect_0_onchip_memory2_0_s1_byteenable                : std_logic_vector(3 downto 0);  -- mm_interconnect_0:onchip_memory2_0_s1_byteenable -> onchip_memory2_0:byteenable
 	signal mm_interconnect_0_onchip_memory2_0_s1_write                     : std_logic;                     -- mm_interconnect_0:onchip_memory2_0_s1_write -> onchip_memory2_0:write
 	signal mm_interconnect_0_onchip_memory2_0_s1_writedata                 : std_logic_vector(31 downto 0); -- mm_interconnect_0:onchip_memory2_0_s1_writedata -> onchip_memory2_0:writedata
@@ -394,9 +396,9 @@ architecture rtl of niosLab2 is
 	signal reset_reset_n_ports_inv                                         : std_logic;                     -- reset_reset_n:inv -> rst_controller:reset_in0
 	signal mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_read_ports_inv  : std_logic;                     -- mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_read:inv -> jtag_uart_0:av_read_n
 	signal mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_write_ports_inv : std_logic;                     -- mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_write:inv -> jtag_uart_0:av_write_n
-	signal mm_interconnect_0_pio_0_s1_write_ports_inv                      : std_logic;                     -- mm_interconnect_0_pio_0_s1_write:inv -> pio_0:write_n
-	signal mm_interconnect_0_pio_1_s1_write_ports_inv                      : std_logic;                     -- mm_interconnect_0_pio_1_s1_write:inv -> pio_1:write_n
-	signal rst_controller_reset_out_reset_ports_inv                        : std_logic;                     -- rst_controller_reset_out_reset:inv -> [jtag_uart_0:rst_n, nios2_gen2_0:reset_n, pio_0:reset_n, pio_1:reset_n, pio_in:reset_n]
+	signal mm_interconnect_0_pio_leds_s1_write_ports_inv                   : std_logic;                     -- mm_interconnect_0_pio_leds_s1_write:inv -> pio_leds:write_n
+	signal mm_interconnect_0_pio_motor_s1_write_ports_inv                  : std_logic;                     -- mm_interconnect_0_pio_motor_s1_write:inv -> pio_motor:write_n
+	signal rst_controller_reset_out_reset_ports_inv                        : std_logic;                     -- rst_controller_reset_out_reset:inv -> [jtag_uart_0:rst_n, nios2_gen2_0:reset_n, pio_in:reset_n, pio_leds:reset_n, pio_motor:reset_n]
 
 begin
 
@@ -474,37 +476,37 @@ begin
 			freeze     => '0'                                              -- (terminated)
 		);
 
-	pio_0 : component niosLab2_pio_0
-		port map (
-			clk        => clk_clk,                                    --                 clk.clk
-			reset_n    => rst_controller_reset_out_reset_ports_inv,   --               reset.reset_n
-			address    => mm_interconnect_0_pio_0_s1_address,         --                  s1.address
-			write_n    => mm_interconnect_0_pio_0_s1_write_ports_inv, --                    .write_n
-			writedata  => mm_interconnect_0_pio_0_s1_writedata,       --                    .writedata
-			chipselect => mm_interconnect_0_pio_0_s1_chipselect,      --                    .chipselect
-			readdata   => mm_interconnect_0_pio_0_s1_readdata,        --                    .readdata
-			out_port   => leds_export                                 -- external_connection.export
-		);
-
-	pio_1 : component niosLab2_pio_1
-		port map (
-			clk        => clk_clk,                                    --                 clk.clk
-			reset_n    => rst_controller_reset_out_reset_ports_inv,   --               reset.reset_n
-			address    => mm_interconnect_0_pio_1_s1_address,         --                  s1.address
-			write_n    => mm_interconnect_0_pio_1_s1_write_ports_inv, --                    .write_n
-			writedata  => mm_interconnect_0_pio_1_s1_writedata,       --                    .writedata
-			chipselect => mm_interconnect_0_pio_1_s1_chipselect,      --                    .chipselect
-			readdata   => mm_interconnect_0_pio_1_s1_readdata,        --                    .readdata
-			out_port   => open                                        -- external_connection.export
-		);
-
 	pio_in : component niosLab2_pio_in
 		port map (
 			clk      => clk_clk,                                  --                 clk.clk
 			reset_n  => rst_controller_reset_out_reset_ports_inv, --               reset.reset_n
 			address  => mm_interconnect_0_pio_in_s1_address,      --                  s1.address
 			readdata => mm_interconnect_0_pio_in_s1_readdata,     --                    .readdata
-			in_port  => open                                      -- external_connection.export
+			in_port  => pioin_export                              -- external_connection.export
+		);
+
+	pio_leds : component niosLab2_pio_leds
+		port map (
+			clk        => clk_clk,                                       --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,      --               reset.reset_n
+			address    => mm_interconnect_0_pio_leds_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_0_pio_leds_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_0_pio_leds_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_0_pio_leds_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_0_pio_leds_s1_readdata,        --                    .readdata
+			out_port   => leds_export                                    -- external_connection.export
+		);
+
+	pio_motor : component niosLab2_pio_motor
+		port map (
+			clk        => clk_clk,                                        --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,       --               reset.reset_n
+			address    => mm_interconnect_0_pio_motor_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_0_pio_motor_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_0_pio_motor_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_0_pio_motor_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_0_pio_motor_s1_readdata,        --                    .readdata
+			out_port   => motor_export                                    -- external_connection.export
 		);
 
 	mm_interconnect_0 : component niosLab2_mm_interconnect_0
@@ -553,18 +555,18 @@ begin
 			onchip_memory_0_s1_byteenable                      => mm_interconnect_0_onchip_memory_0_s1_byteenable,             --                                             .byteenable
 			onchip_memory_0_s1_chipselect                      => mm_interconnect_0_onchip_memory_0_s1_chipselect,             --                                             .chipselect
 			onchip_memory_0_s1_clken                           => mm_interconnect_0_onchip_memory_0_s1_clken,                  --                                             .clken
-			pio_0_s1_address                                   => mm_interconnect_0_pio_0_s1_address,                          --                                     pio_0_s1.address
-			pio_0_s1_write                                     => mm_interconnect_0_pio_0_s1_write,                            --                                             .write
-			pio_0_s1_readdata                                  => mm_interconnect_0_pio_0_s1_readdata,                         --                                             .readdata
-			pio_0_s1_writedata                                 => mm_interconnect_0_pio_0_s1_writedata,                        --                                             .writedata
-			pio_0_s1_chipselect                                => mm_interconnect_0_pio_0_s1_chipselect,                       --                                             .chipselect
-			pio_1_s1_address                                   => mm_interconnect_0_pio_1_s1_address,                          --                                     pio_1_s1.address
-			pio_1_s1_write                                     => mm_interconnect_0_pio_1_s1_write,                            --                                             .write
-			pio_1_s1_readdata                                  => mm_interconnect_0_pio_1_s1_readdata,                         --                                             .readdata
-			pio_1_s1_writedata                                 => mm_interconnect_0_pio_1_s1_writedata,                        --                                             .writedata
-			pio_1_s1_chipselect                                => mm_interconnect_0_pio_1_s1_chipselect,                       --                                             .chipselect
 			pio_in_s1_address                                  => mm_interconnect_0_pio_in_s1_address,                         --                                    pio_in_s1.address
-			pio_in_s1_readdata                                 => mm_interconnect_0_pio_in_s1_readdata                         --                                             .readdata
+			pio_in_s1_readdata                                 => mm_interconnect_0_pio_in_s1_readdata,                        --                                             .readdata
+			pio_leds_s1_address                                => mm_interconnect_0_pio_leds_s1_address,                       --                                  pio_leds_s1.address
+			pio_leds_s1_write                                  => mm_interconnect_0_pio_leds_s1_write,                         --                                             .write
+			pio_leds_s1_readdata                               => mm_interconnect_0_pio_leds_s1_readdata,                      --                                             .readdata
+			pio_leds_s1_writedata                              => mm_interconnect_0_pio_leds_s1_writedata,                     --                                             .writedata
+			pio_leds_s1_chipselect                             => mm_interconnect_0_pio_leds_s1_chipselect,                    --                                             .chipselect
+			pio_motor_s1_address                               => mm_interconnect_0_pio_motor_s1_address,                      --                                 pio_motor_s1.address
+			pio_motor_s1_write                                 => mm_interconnect_0_pio_motor_s1_write,                        --                                             .write
+			pio_motor_s1_readdata                              => mm_interconnect_0_pio_motor_s1_readdata,                     --                                             .readdata
+			pio_motor_s1_writedata                             => mm_interconnect_0_pio_motor_s1_writedata,                    --                                             .writedata
+			pio_motor_s1_chipselect                            => mm_interconnect_0_pio_motor_s1_chipselect                    --                                             .chipselect
 		);
 
 	irq_mapper : component niosLab2_irq_mapper
@@ -711,9 +713,9 @@ begin
 
 	mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_write_ports_inv <= not mm_interconnect_0_jtag_uart_0_avalon_jtag_slave_write;
 
-	mm_interconnect_0_pio_0_s1_write_ports_inv <= not mm_interconnect_0_pio_0_s1_write;
+	mm_interconnect_0_pio_leds_s1_write_ports_inv <= not mm_interconnect_0_pio_leds_s1_write;
 
-	mm_interconnect_0_pio_1_s1_write_ports_inv <= not mm_interconnect_0_pio_1_s1_write;
+	mm_interconnect_0_pio_motor_s1_write_ports_inv <= not mm_interconnect_0_pio_motor_s1_write;
 
 	rst_controller_reset_out_reset_ports_inv <= not rst_controller_reset_out_reset;
 

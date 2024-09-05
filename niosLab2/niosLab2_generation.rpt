@@ -1,6 +1,6 @@
 Info: Starting: Create block symbol file (.bsf)
-Info: qsys-generate /home/ariel/insper/24_2/soc/lab-2/niosLab2.qsys --block-symbol-file --output-directory=/home/ariel/insper/24_2/soc/lab-2/niosLab2 --family="Cyclone V" --part=5CSXFC6D6F31C6
-Progress: Loading lab-2/niosLab2.qsys
+Info: qsys-generate /home/vacbo/Documents/Emb-Avancados/lab-2-soc/niosLab2.qsys --block-symbol-file --output-directory=/home/vacbo/Documents/Emb-Avancados/lab-2-soc/niosLab2 --family="Cyclone V" --part=5CSXFC6D6F31C6
+Progress: Loading lab-2-soc/niosLab2.qsys
 Progress: Reading input file
 Progress: Adding clk_0 [clock_source 23.1]
 Progress: Parameterizing module clk_0
@@ -12,12 +12,12 @@ Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 23.1]
 Progress: Parameterizing module onchip_memory2_0
 Progress: Adding onchip_memory_0 [altera_avalon_onchip_memory2 23.1]
 Progress: Parameterizing module onchip_memory_0
-Progress: Adding pio_0 [altera_avalon_pio 23.1]
-Progress: Parameterizing module pio_0
-Progress: Adding pio_1 [altera_avalon_pio 23.1]
-Progress: Parameterizing module pio_1
 Progress: Adding pio_in [altera_avalon_pio 23.1]
 Progress: Parameterizing module pio_in
+Progress: Adding pio_leds [altera_avalon_pio 23.1]
+Progress: Parameterizing module pio_leds
+Progress: Adding pio_motor [altera_avalon_pio 23.1]
+Progress: Parameterizing module pio_motor
 Progress: Building connections
 Progress: Parameterizing connections
 Progress: Validating
@@ -25,14 +25,12 @@ Progress: Done reading input file
 Info: niosLab2.jtag_uart_0: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
 Warning: niosLab2.nios2_gen2_0: Nios II cores are not recommended for new projects and are subject to removal in a future release. Nios V cores are the recommended replacement as applicable.
 Info: niosLab2.pio_in: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
-Warning: niosLab2.pio_1: pio_1.external_connection must be exported, or connected to a matching conduit.
-Warning: niosLab2.pio_in: pio_in.external_connection must be exported, or connected to a matching conduit.
 Info: qsys-generate succeeded.
 Info: Finished: Create block symbol file (.bsf)
 Info: 
 Info: Starting: Create HDL design files for synthesis
-Info: qsys-generate /home/ariel/insper/24_2/soc/lab-2/niosLab2.qsys --synthesis=VHDL --output-directory=/home/ariel/insper/24_2/soc/lab-2/niosLab2/synthesis --family="Cyclone V" --part=5CSXFC6D6F31C6
-Progress: Loading lab-2/niosLab2.qsys
+Info: qsys-generate /home/vacbo/Documents/Emb-Avancados/lab-2-soc/niosLab2.qsys --synthesis=VHDL --output-directory=/home/vacbo/Documents/Emb-Avancados/lab-2-soc/niosLab2/synthesis --family="Cyclone V" --part=5CSXFC6D6F31C6
+Progress: Loading lab-2-soc/niosLab2.qsys
 Progress: Reading input file
 Progress: Adding clk_0 [clock_source 23.1]
 Progress: Parameterizing module clk_0
@@ -44,12 +42,12 @@ Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 23.1]
 Progress: Parameterizing module onchip_memory2_0
 Progress: Adding onchip_memory_0 [altera_avalon_onchip_memory2 23.1]
 Progress: Parameterizing module onchip_memory_0
-Progress: Adding pio_0 [altera_avalon_pio 23.1]
-Progress: Parameterizing module pio_0
-Progress: Adding pio_1 [altera_avalon_pio 23.1]
-Progress: Parameterizing module pio_1
 Progress: Adding pio_in [altera_avalon_pio 23.1]
 Progress: Parameterizing module pio_in
+Progress: Adding pio_leds [altera_avalon_pio 23.1]
+Progress: Parameterizing module pio_leds
+Progress: Adding pio_motor [altera_avalon_pio 23.1]
+Progress: Parameterizing module pio_motor
 Progress: Building connections
 Progress: Parameterizing connections
 Progress: Validating
@@ -57,34 +55,32 @@ Progress: Done reading input file
 Info: niosLab2.jtag_uart_0: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
 Warning: niosLab2.nios2_gen2_0: Nios II cores are not recommended for new projects and are subject to removal in a future release. Nios V cores are the recommended replacement as applicable.
 Info: niosLab2.pio_in: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
-Warning: niosLab2.pio_1: pio_1.external_connection must be exported, or connected to a matching conduit.
-Warning: niosLab2.pio_in: pio_in.external_connection must be exported, or connected to a matching conduit.
 Info: niosLab2: Generating niosLab2 "niosLab2" for QUARTUS_SYNTH
 Info: jtag_uart_0: Starting RTL generation for module 'niosLab2_jtag_uart_0'
-Info: jtag_uart_0:   Generation command is [exec /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=niosLab2_jtag_uart_0 --dir=/tmp/alt9969_6032585196795711550.dir/0002_jtag_uart_0_gen/ --quartus_dir=/home/ariel/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9969_6032585196795711550.dir/0002_jtag_uart_0_gen//niosLab2_jtag_uart_0_component_configuration.pl  --do_build_sim=0  ]
+Info: jtag_uart_0:   Generation command is [exec /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=niosLab2_jtag_uart_0 --dir=/tmp/alt9971_44901332539561079.dir/0002_jtag_uart_0_gen/ --quartus_dir=/home/vacbo/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9971_44901332539561079.dir/0002_jtag_uart_0_gen//niosLab2_jtag_uart_0_component_configuration.pl  --do_build_sim=0  ]
 Info: jtag_uart_0: Done RTL generation for module 'niosLab2_jtag_uart_0'
 Info: jtag_uart_0: "niosLab2" instantiated altera_avalon_jtag_uart "jtag_uart_0"
 Info: nios2_gen2_0: "niosLab2" instantiated altera_nios2_gen2 "nios2_gen2_0"
 Info: onchip_memory2_0: Starting RTL generation for module 'niosLab2_onchip_memory2_0'
-Info: onchip_memory2_0:   Generation command is [exec /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=niosLab2_onchip_memory2_0 --dir=/tmp/alt9969_6032585196795711550.dir/0003_onchip_memory2_0_gen/ --quartus_dir=/home/ariel/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9969_6032585196795711550.dir/0003_onchip_memory2_0_gen//niosLab2_onchip_memory2_0_component_configuration.pl  --do_build_sim=0  ]
+Info: onchip_memory2_0:   Generation command is [exec /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=niosLab2_onchip_memory2_0 --dir=/tmp/alt9971_44901332539561079.dir/0003_onchip_memory2_0_gen/ --quartus_dir=/home/vacbo/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9971_44901332539561079.dir/0003_onchip_memory2_0_gen//niosLab2_onchip_memory2_0_component_configuration.pl  --do_build_sim=0  ]
 Info: onchip_memory2_0: Done RTL generation for module 'niosLab2_onchip_memory2_0'
 Info: onchip_memory2_0: "niosLab2" instantiated altera_avalon_onchip_memory2 "onchip_memory2_0"
 Info: onchip_memory_0: Starting RTL generation for module 'niosLab2_onchip_memory_0'
-Info: onchip_memory_0:   Generation command is [exec /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=niosLab2_onchip_memory_0 --dir=/tmp/alt9969_6032585196795711550.dir/0004_onchip_memory_0_gen/ --quartus_dir=/home/ariel/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9969_6032585196795711550.dir/0004_onchip_memory_0_gen//niosLab2_onchip_memory_0_component_configuration.pl  --do_build_sim=0  ]
+Info: onchip_memory_0:   Generation command is [exec /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=niosLab2_onchip_memory_0 --dir=/tmp/alt9971_44901332539561079.dir/0004_onchip_memory_0_gen/ --quartus_dir=/home/vacbo/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9971_44901332539561079.dir/0004_onchip_memory_0_gen//niosLab2_onchip_memory_0_component_configuration.pl  --do_build_sim=0  ]
 Info: onchip_memory_0: Done RTL generation for module 'niosLab2_onchip_memory_0'
 Info: onchip_memory_0: "niosLab2" instantiated altera_avalon_onchip_memory2 "onchip_memory_0"
-Info: pio_0: Starting RTL generation for module 'niosLab2_pio_0'
-Info: pio_0:   Generation command is [exec /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=niosLab2_pio_0 --dir=/tmp/alt9969_6032585196795711550.dir/0005_pio_0_gen/ --quartus_dir=/home/ariel/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9969_6032585196795711550.dir/0005_pio_0_gen//niosLab2_pio_0_component_configuration.pl  --do_build_sim=0  ]
-Info: pio_0: Done RTL generation for module 'niosLab2_pio_0'
-Info: pio_0: "niosLab2" instantiated altera_avalon_pio "pio_0"
-Info: pio_1: Starting RTL generation for module 'niosLab2_pio_1'
-Info: pio_1:   Generation command is [exec /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=niosLab2_pio_1 --dir=/tmp/alt9969_6032585196795711550.dir/0006_pio_1_gen/ --quartus_dir=/home/ariel/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9969_6032585196795711550.dir/0006_pio_1_gen//niosLab2_pio_1_component_configuration.pl  --do_build_sim=0  ]
-Info: pio_1: Done RTL generation for module 'niosLab2_pio_1'
-Info: pio_1: "niosLab2" instantiated altera_avalon_pio "pio_1"
 Info: pio_in: Starting RTL generation for module 'niosLab2_pio_in'
-Info: pio_in:   Generation command is [exec /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/ariel/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=niosLab2_pio_in --dir=/tmp/alt9969_6032585196795711550.dir/0007_pio_in_gen/ --quartus_dir=/home/ariel/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9969_6032585196795711550.dir/0007_pio_in_gen//niosLab2_pio_in_component_configuration.pl  --do_build_sim=0  ]
+Info: pio_in:   Generation command is [exec /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=niosLab2_pio_in --dir=/tmp/alt9971_44901332539561079.dir/0005_pio_in_gen/ --quartus_dir=/home/vacbo/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9971_44901332539561079.dir/0005_pio_in_gen//niosLab2_pio_in_component_configuration.pl  --do_build_sim=0  ]
 Info: pio_in: Done RTL generation for module 'niosLab2_pio_in'
 Info: pio_in: "niosLab2" instantiated altera_avalon_pio "pio_in"
+Info: pio_leds: Starting RTL generation for module 'niosLab2_pio_leds'
+Info: pio_leds:   Generation command is [exec /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=niosLab2_pio_leds --dir=/tmp/alt9971_44901332539561079.dir/0006_pio_leds_gen/ --quartus_dir=/home/vacbo/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9971_44901332539561079.dir/0006_pio_leds_gen//niosLab2_pio_leds_component_configuration.pl  --do_build_sim=0  ]
+Info: pio_leds: Done RTL generation for module 'niosLab2_pio_leds'
+Info: pio_leds: "niosLab2" instantiated altera_avalon_pio "pio_leds"
+Info: pio_motor: Starting RTL generation for module 'niosLab2_pio_motor'
+Info: pio_motor:   Generation command is [exec /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/bin/perl -I /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/perl/lib -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=niosLab2_pio_motor --dir=/tmp/alt9971_44901332539561079.dir/0007_pio_motor_gen/ --quartus_dir=/home/vacbo/intelFPGA_lite/23.1std/quartus --verilog --config=/tmp/alt9971_44901332539561079.dir/0007_pio_motor_gen//niosLab2_pio_motor_component_configuration.pl  --do_build_sim=0  ]
+Info: pio_motor: Done RTL generation for module 'niosLab2_pio_motor'
+Info: pio_motor: "niosLab2" instantiated altera_avalon_pio "pio_motor"
 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
@@ -96,13 +92,13 @@ Info: mm_interconnect_0: "niosLab2" instantiated altera_mm_interconnect "mm_inte
 Info: irq_mapper: "niosLab2" instantiated altera_irq_mapper "irq_mapper"
 Info: rst_controller: "niosLab2" instantiated altera_reset_controller "rst_controller"
 Info: cpu: Starting RTL generation for module 'niosLab2_nios2_gen2_0_cpu'
-Info: cpu:   Generation command is [exec /home/ariel/intelFPGA_lite/23.1std/quartus/linux64//perl/bin/perl -I /home/ariel/intelFPGA_lite/23.1std/quartus/linux64//perl/lib -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/ariel/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- /home/ariel/intelFPGA_lite/23.1std/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.pl --name=niosLab2_nios2_gen2_0_cpu --dir=/tmp/alt9969_6032585196795711550.dir/0010_cpu_gen/ --quartus_bindir=/home/ariel/intelFPGA_lite/23.1std/quartus/linux64/ --verilog --config=/tmp/alt9969_6032585196795711550.dir/0010_cpu_gen//niosLab2_nios2_gen2_0_cpu_processor_configuration.pl  --do_build_sim=0  ]
-Info: cpu: # 2024.09.03 19:49:11 (*) Starting Nios II generation
-Info: cpu: # 2024.09.03 19:49:11 (*)   Elaborating CPU configuration settings
-Info: cpu: # 2024.09.03 19:49:11 (*)   Creating all objects for CPU
-Info: cpu: # 2024.09.03 19:49:12 (*)   Generating RTL from CPU objects
-Info: cpu: # 2024.09.03 19:49:12 (*)   Creating plain-text RTL
-Info: cpu: # 2024.09.03 19:49:12 (*) Done Nios II generation
+Info: cpu:   Generation command is [exec /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64//perl/bin/perl -I /home/vacbo/intelFPGA_lite/23.1std/quartus/linux64//perl/lib -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin/europa -I /home/vacbo/intelFPGA_lite/23.1std/quartus/sopc_builder/bin -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- /home/vacbo/intelFPGA_lite/23.1std/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.pl --name=niosLab2_nios2_gen2_0_cpu --dir=/tmp/alt9971_44901332539561079.dir/0010_cpu_gen/ --quartus_bindir=/home/vacbo/intelFPGA_lite/23.1std/quartus/linux64/ --verilog --config=/tmp/alt9971_44901332539561079.dir/0010_cpu_gen//niosLab2_nios2_gen2_0_cpu_processor_configuration.pl  --do_build_sim=0  ]
+Info: cpu: # 2024.09.05 19:46:38 (*) Starting Nios II generation
+Info: cpu: # 2024.09.05 19:46:38 (*)   Elaborating CPU configuration settings
+Info: cpu: # 2024.09.05 19:46:38 (*)   Creating all objects for CPU
+Info: cpu: # 2024.09.05 19:46:38 (*)   Generating RTL from CPU objects
+Info: cpu: # 2024.09.05 19:46:38 (*)   Creating plain-text RTL
+Info: cpu: # 2024.09.05 19:46:39 (*) Done Nios II generation
 Info: cpu: Done RTL generation for module 'niosLab2_nios2_gen2_0_cpu'
 Info: cpu: "nios2_gen2_0" instantiated altera_nios2_gen2_unit "cpu"
 Info: nios2_gen2_0_data_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "nios2_gen2_0_data_master_translator"
@@ -119,12 +115,12 @@ Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "c
 Info: cmd_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_001"
 Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
 Info: cmd_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_001"
-Info: Reusing file /home/ariel/insper/24_2/soc/lab-2/niosLab2/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /home/vacbo/Documents/Emb-Avancados/lab-2-soc/niosLab2/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
 Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
-Info: Reusing file /home/ariel/insper/24_2/soc/lab-2/niosLab2/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /home/vacbo/Documents/Emb-Avancados/lab-2-soc/niosLab2/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_001"
-Info: Reusing file /home/ariel/insper/24_2/soc/lab-2/niosLab2/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /home/vacbo/Documents/Emb-Avancados/lab-2-soc/niosLab2/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
 Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
 Info: niosLab2: Done "niosLab2" with 31 modules, 47 files

@@ -2,11 +2,12 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Aug 29, 2024 8:04:53 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1724972693539</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>/home/ariel/insper/24_2/soc/lab-2/software/niosLab2_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>Sep 5, 2024 7:51:57 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1725576717553</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>/home/vacbo/Documents/Emb-Avancados/lab-2-soc/software/niosLab2_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>../../niosLab2.sopcinfo</SopcDesignFile>
+        <SystemFileHash>719512511ff368bc4363f52db78d2692794592c1b573bf5358518019ee4ef4</SystemFileHash>
         <JdiFile>default</JdiFile>
         <Cpu>nios2_gen2_0</Cpu>
         <SchemaVersion>1.9</SchemaVersion>
@@ -110,7 +111,7 @@
                 <SettingName>hal.linker.enable_alt_load_copy_exceptions</SettingName>
                 <Identifier>none</Identifier>
                 <Type>Boolean</Type>
-                <Value>1</Value>
+                <Value>0</Value>
                 <DefaultValue>0</DefaultValue>
                 <DestinationFile>none</DestinationFile>
                 <Description>Causes the alt_load() facility to copy the .exceptions section. If true, this setting defines the macro ALT_LOAD_COPY_EXCEPTIONS in linker.h.</Description>
@@ -230,7 +231,7 @@
                 <SettingName>hal.log_port</SettingName>
                 <Identifier>none</Identifier>
                 <Type>UnquotedString</Type>
-                <Value>jtag_uart_0</Value>
+                <Value>none</Value>
                 <DefaultValue>none</DefaultValue>
                 <DestinationFile>public_mk_define</DestinationFile>
                 <Description>Slave descriptor of debug logging character-mode device. If defined, it enables extra debug messages in the HAL source. This setting is used by the ALT_LOG_PORT family of defines in system.h.</Description>
@@ -900,54 +901,68 @@
         </Setting>
         <MemoryMap>
                 <slaveDescriptor>onchip_memory2_0</slaveDescriptor>
+                <addressRange>0x00000000 - 0x0000FFFF</addressRange>
+                <addressSpan>65536</addressSpan>
+                <attributes>memory</attributes>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>onchip_memory_0</slaveDescriptor>
                 <addressRange>0x00010000 - 0x00017FFF</addressRange>
                 <addressSpan>32768</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>onchip_memory_0</slaveDescriptor>
-                <addressRange>0x00018000 - 0x0001FFFF</addressRange>
-                <addressSpan>32768</addressSpan>
-                <attributes>memory</attributes>
+                <slaveDescriptor>pio_motor</slaveDescriptor>
+                <addressRange>0x00019000 - 0x0001900F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>pio_0</slaveDescriptor>
-                <addressRange>0x00021000 - 0x0002100F</addressRange>
+                <slaveDescriptor>pio_in</slaveDescriptor>
+                <addressRange>0x00019010 - 0x0001901F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>pio_leds</slaveDescriptor>
+                <addressRange>0x00019020 - 0x0001902F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>jtag_uart_0</slaveDescriptor>
-                <addressRange>0x00021010 - 0x00021017</addressRange>
+                <addressRange>0x00019030 - 0x00019037</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>
         <LinkerSection>
-                <sectionName>.entry</sectionName>
-                <regionName>onchip_memory2_0</regionName>
-        </LinkerSection>
-        <LinkerSection>
                 <sectionName>.text</sectionName>
                 <regionName>onchip_memory2_0</regionName>
+                <noLoad>false</noLoad>
         </LinkerSection>
         <LinkerSection>
                 <sectionName>.rodata</sectionName>
                 <regionName>onchip_memory_0</regionName>
+                <noLoad>false</noLoad>
         </LinkerSection>
         <LinkerSection>
                 <sectionName>.rwdata</sectionName>
                 <regionName>onchip_memory_0</regionName>
+                <noLoad>false</noLoad>
         </LinkerSection>
         <LinkerSection>
                 <sectionName>.bss</sectionName>
                 <regionName>onchip_memory_0</regionName>
+                <noLoad>false</noLoad>
         </LinkerSection>
         <LinkerSection>
                 <sectionName>.heap</sectionName>
                 <regionName>onchip_memory_0</regionName>
+                <noLoad>false</noLoad>
         </LinkerSection>
         <LinkerSection>
                 <sectionName>.stack</sectionName>
                 <regionName>onchip_memory_0</regionName>
+                <noLoad>false</noLoad>
         </LinkerSection>
 </sch:Settings>
