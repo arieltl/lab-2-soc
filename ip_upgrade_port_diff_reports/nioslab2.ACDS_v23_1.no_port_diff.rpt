@@ -1,0 +1,23 @@
+IP Ports Diff Report for nioslab2
+Tue Sep  3 19:31:57 2024
+Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. IP Information
+
+
+
++--------------------------------------------------------+
+; IP Information                                         ;
++----------------------+---------------------------------+
+; IP Variation Name    ; nioslab2                        ;
+; Prior Version        ; ACDS_v18.1                      ;
+; New Version          ; ACDS_v23.1                      ;
+; New File             ; niosLab2/synthesis/niosLab2.vhd ;
+; Has Port Differences ; No                              ;
++----------------------+---------------------------------+
+
+
